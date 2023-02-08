@@ -46,11 +46,8 @@ const Form = (props) => {
   }
 
 
-  return (
-    
-    <div className="contact flex-columns">
-      <div className="form_card column-2">
-        <h2>Si desea ponerse en contacto</h2>
+  return ( 
+   <>
         <form onSubmit={sendEmail} ref={form} className="callback-form">
           <div className="form-control">
             <label htmlFor="user_name"></label>
@@ -75,21 +72,7 @@ const Form = (props) => {
           className="btn"/>:null}
         </form>
       {Loading ? <ContactLoader/> : null}
-      </div>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme='colored'
-        transition={Flip}
-      />
-    </div>
+  </>
   )
 }
 

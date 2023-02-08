@@ -1,0 +1,24 @@
+---
+import Form from "./Form";
+import { ToastContainer, Flip } from "react-toastify";
+---
+
+<div class="contact flex-columns">
+  <div class="form_card column-2">
+    <h2>Si desea ponerse en contacto</h2>
+    <Form client:idle/>
+  </div>
+  <ToastContainer
+    position="bottom-right"
+    autoClose={5000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="colored"
+    transition={Flip}
+  />
+</div>

@@ -29,346 +29,534 @@ import HeadBase from "../components/headBase.astro";
 ---
 
 <HeadBase
-title="4- Cómo se distribuyen los datos y su utilidad"
-description="Cómo se distribuyen los datos y su utilidad"
-keywords="distribuciones, distribucion uniforme, bernoulli, binomial, poisson"
+  title="4- Cómo se distribuyen los datos y su utilidad"
+  description="Cómo se distribuyen los datos y su utilidad"
+  keywords="distribuciones, distribucion uniforme, bernoulli, binomial, poisson"
 />
-<ChapterLayout chapter_title ="4- Cómo se distribuyen los datos y su utilidad"
-        chapter_image= {estanques}>
-
-        <ContentsTable contenidos ={[
-            { titulo:"4.1-¿Qué es la distribucion de una variable?",
-             link: "#definicion"},
-             { titulo:"4.2- Veamos algunos términos importantes",
-             link: "#glosario"},
-             { titulo:"4.3- Distribuciones discretas",
-             link: "#discretas"},
-             { titulo:"4.3.1- Distribuciones discretas - Uniforme",
-             link: "#discretas"},
-             { titulo:"4.3.2- Distribuciones discretas - Bernoulli",
-             link: "#bernoulli"},
-             { titulo:"4.3.3- Distribuciones discretas - Binomial",
-             link: "#binomial"},
-             { titulo:"4.3.3.1- Distribucion Binomial en Excel",
-             link: "#binexcel"},
-             { titulo:"4.3.4- Distribucion discretas - Poisson",
-             link: "#poisson"},
-             { titulo:"4.4- Distribuciones continuas",
-             link: "DistribucionesII#continuas"},
-             { titulo:"4.4.1- Distribuciones continuas - normal",
-             link: "DistribucionesII#normal"},
-             { titulo:"4.4.2- Distribuciones continuas - normal estandarizada",
-             link: "DistribucionesII#normal-estandar"},
-             { titulo:"4.4.3- Distribuciones continuas- t-Student ",
-             link: "DistribucionesII#t-student"},
-             { titulo:"4.4.4- Distribuciones continuas- Chi-Cuadrado ",
-             link: "DistribucionesII#chi-cuadrado"},
-             { titulo:"4.5- Teorema central del límite",
-             link: "DistribucionesII#teorema"}
-         ]}/>
-         <SubChapter id = "definicion" >
-            <SubTitle title = "4.1- ¿Qué es la distribución de una variable?" />
-            <Paragraph>
-                <p>Ya revisamos un poco el tema de las <a href={"/probabilidades"}><u>Probabilidades</u></a> para poder continuar con las distribuciones. La distribución de una variable es la manera de describir a través de un histograma de frecuencias el patrón o comportamiento de los datos. También es una función matemática que muestra los posibles valores que toma una variable (peso corporal, producción de leche, alimento consumido) y la frecuencia con que estas variables ocurren dentro de un experimento o dentro de una muestra poblacional. Siempre es muy importante visualizar los datos con los que estamos trabajando para tener idea de como se distribuyen. Por ejemplo, si tomamos el peso de 1000 novillos de 24 meses y construimos 19 intervalos iguales donde se <b>distribuyan</b> desde el mínimo hasta el máximo peso y con los resultados graficamos un histograma de frecuencias tendremos la siguiente distribución. Entonces conociendo las distribuciones de los eventos podemos calcular la probabilidad de que un evento suceda. </p>
-            </Paragraph>
-            <ImagePlus 
-            client:visible
-            width = "40%"
-            max_zoom = "70%"
-            image = {dist1}
-            texto = "Histográma de frecuencias para pesos de 1000 novillos "
-            />  
-            
-        <Paragraph texto ="El histograma representa de manera gráfica como se distribuyen los datos. En el gráfico superior se observa como la mayoría de los datos están concentrados al medio con mas de cien animales por intervalo (eje Y), mientras que los extremos (valores mínimos y máximos) obedecen a unos pocos animales con menos de 20 animales por intervalo.  Esto nos podría indicar que el peso de los novillos obedece al parámetro de una curva de distribución normal como lo veremos mas adelante. Las distribuciones las utilizamos para conocer los valores aleatorios que una variable puede tomar en un experimento o en una muestra y la frecuencia con la que ellas ocurren. Del ejemplo anterior podríamos deducir que es muy probable que un animal que escojamos al azar de esa muestra, su peso va a estar mas hacia los intervalos del medio que hacia los extremos."/>
-         </SubChapter>
-         <SubChapter id ="glosario">
-            <SubTitle title="4.2- Repasemos algunas definiciones"/>
-            <Paragraph>
-                <ul>
-                    <li><b>- Frecuencia</b>: es el número de veces en que un valor determinado o un resultado se repite durante el experimento o aparece en el <a href={"/probabilidades#glosario"}><u>espacio muestral</u></a>.  Normalmente se representa por medio de un histograma. </li>
-                    <li><b>- Probabilidad de una distribución de frecuencia</b>: es una colección de las probabilidades de los posibles resultados de un evento. </li>
-                    <li><b>- Función de la probabilidad</b>: es una función que asigna una probabilidad a cada distinto resultado en el espacio muestral.  Donde: Y = resultado actual,  y = es uno de los posibles resultados de Y o sea uno de los valores dentro de la distribución. Entonces, <center><h4>P(Y = y) = p(y)</h4></center>  </li>
-                    <li><b>- Población</b>: es el conjunto formado  por todos los valores posibles que puede asumir la variable objeto de estudio.  Ejemplo: la producción de leche de todas las vacas de la región lechera de un país. </li>
-                    <li><b>- Muestra</b>: es cualquier subconjunto de la población escogido al seguir ciertos criterios de selección. Ejemplo: La producción de leche de las vacas del 10% de las fincas de la región lechera.</li>
-                </ul>
-            </Paragraph>
-         </SubChapter>
-         <SubChapter id = "discretas">
-            <SubTitle title="4.3- Distribuciones discretas"/>
-            <Paragraph>
-                <p>
-                Una distribución discreta es un una distribución de probabilidad que muestra la ocurrencia de resultados que se pueden contar
-                (<a href="https://www.investopedia.com/terms/d/discrete-distribution.asp"><u>Young, 2021</u></a>) por ejemplo el total de animales nacidos
-                 vivos en una camada de cerdos (1,2,3,...,14) o la probabilidad de que una cerda esté vacía o preñada (0 o 1). Las probabilidades discretas tienen un
-                  número finito de resultados, los valores que toma la variable son unidades (1 caballo por pesebrera, 50000 células somáticas por mililitro
-                   de leche). Los resultados de la distribución discreta se visualizan en forma tabular en barras alineadas una después de la otra
-                </p>
-            </Paragraph>
-            <SubTitle title="4.3.1- Distribuciones discretas - Uniforme"/>
-            <Paragraph texto = "Es tal vez la distribución discreta mas simple, ya que cada variable tiene las mismas probabilidades de ocurrir."/>
-         <Paragraph>
-            <p>Las principales propiedades de la distribución uniforme son:</p>
-            <ul>
-                <li>*	Todos los resultados tienen la misma probabilidad.</li>
-                <li>*	Todas las barras en el gráfico tienen la misma altura.</li>
-                <li>*	El valor esperado y la varianza no tienen poder predictivo.</li>
-            </ul>
-            <br/>
-            <p>Ejemplo: si tenemos en un corral 4 novillas cada una de color diferente (blanca, negra, parda, roja), ¿Cual es la probabilidad de
-             que salga la novilla blanca?</p>
-         </Paragraph>
-         <ImagePlus 
-         client:visible
-                width = "30%"
-                max_zoom = "50%"
-                image = {uniform1}
-                texto = "Distribución uniforme "
-                /> 
-                <Paragraph texto = "Entonces, según la formula general de la probabilidad, la novilla blanca tiene ¼ o 25% de probabilidad de salir, esta es la misma probabilidad para cada una de las restantes novillas, donde:"/> 
-                <center><h4> 1/4+1/4+1/4+1/4 = 1 </h4></center>
-                
-            <Paragraph texto = "No podemos calcular la media, no hay varianza y no hay interés en hacer alguna predicción.   Como podemos ver en el gráfico anterior cada color tiene exactamente la misma probabilidad de ser escogido (25% c/u)."/>
-
-            <ImagePlus 
-            client:visible
-                    width = "30%"
-                    max_zoom = "50%"
-                    image = {uniform2}
-                    texto = "Histograma de frecuencias dist. Uniforme "
-                    />  
-                    <DownloadButton link = "https://github.com/HectorDR/vetDataScience/blob/hojas_excel/4.3.1_Dist_Uniforme.xlsx?raw=true" client:visible/> 
-    </SubChapter>
-
-    <SubChapter id ="bernoulli">
-        <SubTitle title="4.3.2- Distribuciones discretas - Bernoulli"/>
-        <Paragraph texto ="Es una distribución que consiste en un solo ensayo y únicamente dos posibles resultados -éxito o fracaso-.  En la distribución de Bernoulli no hay forma de predecir el resultado. El ejemplo típico es lanzar la moneda al aire. En un lanzamiento (experimento) solo hay una posibilidad entre dos cara o sello."/>
-        <Paragraph texto =
-            "Esta distribución tiene por características principales que solo acepta un ensayo y solo hay dos posibles resultados (fracaso o error) "/>
-
-        <Paragraph texto ="La fórmula de la probabilidad de Bernoulli es:"/>
-        <center><h4>Var(Y) = p *(1-p)</h4></center>
-        <br />
-        <Paragraph texto = " A menudo se utiliza la distribución de Bernoulli para determinar el resultado que se espera de un solo ensayo. Ejemplo: una vaca inseminada solo tiene dos posibilidades al chequear: preñada o vacía."/>
-    </SubChapter>
-
-    <SubChapter id = "binomial">
-        <SubTitle title = "4.3.3- Distribuciones discretas-Binomial"/>
-        <Paragraph>
-            <p>La distribución binomial es una secuencia de eventos Bernoulli (éxito-fracaso) de la misma naturaleza. Es decir la distribucion
-             binomial repite un experimento <b>n</b> veces y cuantifica los éxitos y los fracasos.</p>
-             <b>Características:</b>
-            <ul>
-                <li>* Mide la frecuencia de ocurrencia de uno de los posibles resultados sobre los n ensayos.  Para cada ensayo solo son posibles dos resultados (éxito o fracaso).</li>
-                <li>* La probabilidad de éxito debe ser constante (p) y la probabilidad de fracaso igualmente es constante y se representa por 1-p.</li>
-                <li>* Cada experimento es independiente del anterior, lo que ocurre en uno no afecta el resultado del otro.</li>
-            </ul>
-        </Paragraph>
-        <p>La fórmula de la distribución binomial es:</p>
-        <ImagePlus 
-        client:visible
-        width = "30%"
-        max_zoom = "50%"
-        image = {bin1}
-        texto = "Fórmula de la distribución Binomial "
-        />  
-        <Paragraph>
-            <p>Donde: <b>
-            <ul>
-               <li>n = número de ensayos/experimentos</li>
-               <li>x = número de éxitos</li>
-               <li>p= probabilidad de éxito</li>
-               <li> (1-p) = probabilidad de fracaso</li>
-            
-           </ul></b>
-           <br />
-           El resultado entre paréntesis es el resultado de una combinación sin repetición Cn,x donde:</p>
-        </Paragraph>
-        <ImagePlus 
-        client:visible
-        width = "30%"
-        max_zoom = "50%"
-        image = {bin2}
-        texto = " "
-        /> 
-        <Paragraph>
-            <p>Ejemplo, En una finca porcícola la actividad reproductiva se realiza por inseminación artificial. Actualmente 
-            La tasa de preñez es del 65%. Si tenemos un lote de 6 cerdas para inseminar. ¿Cuál es la probabilidad de que 4 de estas cerdas queden
-             preñadas? Entonces:</p> <br/> <b>
-        <ul>
-            <li>n = 6</li>
-            <li>x = 4</li>
-            <li>p = 65%</li>
-            <li>entonces 1 - p = 35%</li>
-        </ul></b>
-        </Paragraph>
-        
-        <ImagePlus 
-        client:visible
-                width = "40%"
-                max_zoom = "60%"
-                image = {bin3}
-                texto = " "
-                /> 
-                <Paragraph texto = "Aproximadamente es del 33% la probabilidad de preñar 4 cerdas dentro de las 6 que se van a inseminar. Si calculamos la probabilidad de que las cerdas inseminadas queden preñadas, podemos ver la distribución de probabilidades en el siguiente gráfico y deducir que hay mayores probabilidades de preñar entre 3 y 5 animales con los actuales resultados."/>
-                <ImagePlus
-                client:visible 
-                width = "40%"
-                max_zoom = "60%"
-                image = {bin4}
-                texto = "Histograma de frecuencias distribución binomial "
-                /> 
-                <center><h2>Que es la la distribución Binomial</h2></center><br/>
-                <Video
-                client:visible
-          id="X4OMdHx6rUk"
-          title="Explicación de la distribución Binomial" />
-    </SubChapter>
-    <SubChapter id = "binexcel">
-        <SubTitle title = "4.3.3.1- Distribucion Binomial en Excel"/>
-        <Paragraph texto ="A pesar de que las fórmulas para calcular las probabilidades de la distribución binomial son relativamente sencillas, la realidad es que realizar estos cálculos en una calculadora normal toman tiempo.  Afortunadamente, podemos hacerlo de manera sencilla y rápida en Excel. Para ello lo primero que debemos tener son los datos en una tabla  divididos en éxitos y fracaso. Por ejemplo retomando nuestro ejemplo de las preñeces de las sección anterior, si construimos una tabla para  6 animales, si las 6 estan preñadas (éxitos), en la siguiente columna de vacias pues tendremos 0 fracasos, en la siguiente fila, si hay 5 preñadas, entonces habrá 1 vacía (fracaso) y así sucesivamente hasta las 6 vacías y 0 preñadas.  Tambien debemos incluir el numero de experimentos n, en este caso son 6 cerdas para escoger. También sabemos por el histórico que la probabilidad p es del 65%, que es el porcentaje de preñeces en el lote y finalmente los éxitos esperados (de 6 hasta 0). Tal como se observa en la tabla inferior"/>
-    
-        <ImagePlus 
-        client:visible
-                    width = "25%"
-                    max_zoom = "50%"
-                    image = {binex1}
-                    texto = "Tabla de éxitos y fracasos para preñeces "
-                    />
-                    <Paragraph>
-                        <p>La función de Excel para calcular la distribución binomial se usa la función <b>DISTR.BINOM o BINOM.DIST</b> en inglés. Si revisamos la captura de pantalla que se encuntra en la parte inferior, primero nos ubicamos en la celda donde deseamos ver el valor (D10), y ahí llamamos la función (=DISTR.BINOM) y la función nos solicita el número de éxitos que se encuentran en la celda B10, luego los ensayos (C5), seguido la probabilidad (C6) y finalmente la opción verdadero (true) si queremos la función acumulada o falso(para el valor específico), en este 
-                        caso decidimos falso.</p>
-                    </Paragraph>
-                    <ImagePlus
-                    client:visible 
-                width = "40%"
-                max_zoom = "60%"
-                image = {binex2}
-                texto = "Asignación de valores en excel (ubicando las celdas) para calcular el resultado de la distribución binomial "
-                /> 
-                <Paragraph>
-                    <p>Una vez tenemos los valores asignados damos enter y corremos la función para todas las posibilidades que deseamos 
-                    calcular sin olvidar asegurar los valores del número de experimentos y probabilidad de éxito (animales preñados). Por ejemplo, para la celda C5
-                     donde se ubica el numero de experimentos, la aseguramos con la opción <b>command + t</b> en una Mac u <b>option + 4</b> desde un 
-                     equipo que corra en ambiente Windows. El signo $ debe aparecer antes de las coordenadas de la celda como se observa en la barra de 
-                     visualización en el recuadro superior.</p>
-                </Paragraph>
-                <ImagePlus 
-                client:visible
-                width = "40%"
-                max_zoom = "60%"
-                image = {binex3}
-                texto = "Porcentajes de la probabilidad de éxito/fracaso "
-                />  
-                <Paragraph texto ="Como se observa en el recuadro superior, la columna de la derecha que fue la asignada para ver los resultados de la probabilidad, cada una de las combinaciones de éxito/fracaso esta dada por un porcentaje, por ejemplo la posibilidad de seleccionar 6 cerdas preñadas es tan solo del 7.5%. La suma de estas probabilidades debe dar 1 o = 100%"/>
-
-                <center><h2>Ejemplo de una distribución binomial en Excel</h2></center>
-                <br/>
-                            <Video
-                            client:visible
-                      id="MqyP0Bm2p4A"
-                      title="La distribución Binomial en Excel" /> 
-                      <DownloadButton link = "https://github.com/HectorDR/vetDataScience/blob/hojas_excel/4.3.3_Dist_Binomial.xlsx?raw=true" client:visible/> 
-    </SubChapter>
-    <SubChapter id = "poisson">
-        <SubTitle title = "4.3.4- Distribuciones discretas-Poisson "/>
-        <Paragraph texto = "Cuando queremos saber la probabilidad de un determinado evento Y, que ocurre en un intervalo de tiempo, distancia, área o volumen definidos usamos la distribución de Poisson."/>
-        <center><h2>Y∼℘(μ)</h2></center>
-        <br/>
-        <Paragraph texto = "La distribución de Poisson solamente depende de un parámetro μ.  Tanto la media como la varianza de esta distribución son siempre positivas.  Se utiliza para determinar que tan posible es un resultado específico, conociendo con que frecuencia este evento ocurre usualmente. Con la distribución de Poisson podemos hacer planificación de espacios, tiempos, áreas o cualquier otro aspecto que implique un evento que ocurra en un espacio/tiempo/área determinada. Por ejemplo: "/>
-        <Paragraph>
-            <b>
-            <ul>
-                <li>- Número de pacientes que necesitan cirugía en una clínica veterinaria por día (planeación de quirófano).</li>
-                <li>-	Número células somáticas por mililitro en leche (identificación de problemas de mastitis clínica).</li>
-                <li> -	Número de partos en una piara por mes (planificación de número de parideras en la finca).</li>
-    
-            </ul></b>
-        </Paragraph>
-        <h4> <center>La fórmula de la distribución de Poisson es:</center></h4>
-    <ImagePlus 
-    client:visible
-     width = "30%"
-    max_zoom = "50%"
-    image = {pois}
-    texto = "Distribución de poisson "
-     />
-     <Paragraph>
-        donde: <b>
-        <ul>
-        <li>P(Y=y) es la probabilidad de y en el intervalo definido</li>
-        <li>μ es el valor esperado o media de y</li>
-        <li>e es la base de los logaritmos naturales (2.71828)</li>
-        </ul></b>
-         <br/>
-        Ejemplo: en una producción porcina el promedio de partos a la semana es de 8 (tasa de partos del 85% y 2.4 camadas/año). Si se mantienen los 
-        mismos índices cual es la probabilidad de tener 12 partos en una semana sabiendo que en este momento la máxima capacidad planeada de parideras es 
-        de hasta 11 partos?<br/><br/>
-        <b>
-        <ul>
-            <li>y= 12 partos/s</li>
-            <li>μ = 8 partos/s</li>
-            
-        </ul></b>
-     </Paragraph>
-     <ImagePlus 
-     client:visible
-     width = "40%"
-    max_zoom = "70%"
-    image = {pois2}
-    texto = "Fórmula de Poisson "
-     />  
-
-    <Paragraph texto ="A pesar de que la probabilidad no es tan alta (~5%), si proyectamos esa probabilidad a un año es posible que en aproximadamente 3 semanas al año (2.6) se nos presente este problema y si se incrementa la tasa de partos, pues seguramente el propietario se verá forzado a incrementar la capacidad instalada. Pero por ahora tal vez no haya necesidad de ampliar si existen otras prioridades."/>
+<ChapterLayout
+  chapter_title="4- Cómo se distribuyen los datos y su utilidad"
+  chapter_image={estanques}
+>
+  <ContentsTable
+    contenidos={[
+      {
+        titulo: "4.1-¿Qué es la distribucion de una variable?",
+        link: "#definicion",
+      },
+      { titulo: "4.2- Veamos algunos términos importantes", link: "#glosario" },
+      { titulo: "4.3- Distribuciones discretas", link: "#discretas" },
+      {
+        titulo: "4.3.1- Distribuciones discretas - Uniforme",
+        link: "#discretas",
+      },
+      {
+        titulo: "4.3.2- Distribuciones discretas - Bernoulli",
+        link: "#bernoulli",
+      },
+      {
+        titulo: "4.3.3- Distribuciones discretas - Binomial",
+        link: "#binomial",
+      },
+      { titulo: "4.3.3.1- Distribucion Binomial en Excel", link: "#binexcel" },
+      { titulo: "4.3.4- Distribucion discretas - Poisson", link: "#poisson" },
+      {
+        titulo: "4.4- Distribuciones continuas",
+        link: "distribuciones2#continuas",
+      },
+      {
+        titulo: "4.4.1- Distribuciones continuas - normal",
+        link: "distribuciones2#normal",
+      },
+      {
+        titulo: "4.4.2- Distribuciones continuas - normal estandarizada",
+        link: "distribuciones2#normal-estandar",
+      },
+      {
+        titulo: "4.4.3- Distribuciones continuas- t-Student ",
+        link: "distribuciones2#t-student",
+      },
+      {
+        titulo: "4.4.4- Distribuciones continuas- Chi-Cuadrado ",
+        link: "distribuciones2#chi-cuadrado",
+      },
+      {
+        titulo: "4.5- Teorema central del límite",
+        link: "distribuciones2#teorema",
+      },
+    ]}
+  />
+  <SubChapter id="definicion">
+    <SubTitle title="4.1- ¿Qué es la distribución de una variable?" />
     <Paragraph>
-        <p>Al igual que con la distribución Binomial, Excel nos permite calcular las probabilidades de esta distribución utilizando la
-        función <b>DISTR.POISSON o POISSON.DIST</b> en inglés. Entonces si queremos construir este tipo de distribución en Excel, lo mas práctico es
-         hacer una tabla con los valores para los cuales deseamos calcular la probabilidad e incluir la media. Como se muestra en la ilustración, nos
-          ubicamos en la celda donde deseamos ubicar la probabilidad, se escribe la función <b>=POISSON.DIST</b>. Si observamos la captura de pantalla ubicada en la parte inferior La función nos va primeo a pedir que insertemos la probabilidad de que ocurra el evento. Esta está ubicada en la celda C7 (probabilidad de un parto a la semana), luego la media de partos semanales que está en la celda C4 y finalmente la opción acumulativa (TRUE o VERDADERO) o si no queremos acumulados FALSO (FALSE).</p>
+      <p>
+        Ya revisamos un poco el tema de las <a href={"/probabilidades"}
+          ><u>Probabilidades</u></a
+        > para poder continuar con las distribuciones. La distribución de una variable
+        es la manera de describir a través de un histograma de frecuencias el patrón
+        o comportamiento de los datos. También es una función matemática que muestra
+        los posibles valores que toma una variable (peso corporal, producción de
+        leche, alimento consumido) y la frecuencia con que estas variables ocurren
+        dentro de un experimento o dentro de una muestra poblacional. Siempre es
+        muy importante visualizar los datos con los que estamos trabajando para tener
+        idea de como se distribuyen. Por ejemplo, si tomamos el peso de 1000 novillos
+        de 24 meses y construimos 19 intervalos iguales donde se <b
+          >distribuyan</b
+        > desde el mínimo hasta el máximo peso y con los resultados graficamos un
+        histograma de frecuencias tendremos la siguiente distribución. Entonces conociendo
+        las distribuciones de los eventos podemos calcular la probabilidad de que
+        un evento suceda.
+      </p>
     </Paragraph>
-    <ImagePlus 
-    client:visible
-     width = "40%"
-    max_zoom = "60%"
-    image = {pois3}
-    texto = "Poisson en Excel "
-     /> 
-     
-     <Paragraph>
-        <p>
-        Realizamos el mismo procedimiento para los demás valores (estiramos la función) tal como hicimos con la distribución
-        <a href={"/distribuciones#binexcel"}><u>Binomial</u></a> y de esta manera obtenemos nuestra tabla con las
-        probabilidades de partos a la semana:
-    </p>
-</Paragraph>
-    <ImagePlus 
-    client:visible
-     width = "40%"
-    max_zoom = "60%"
-    image = {pois4}
-    texto = "Probabilidades para x número de partos a la semana, siguiendo la distribución de Poisson "
-     /> 
-    <p><center><b>Utilizando el diagrama de barras podemos visualizar la curva de la distribucion de Poisson para el ejemplo anterior</b></center></p> <br />
     <ImagePlus
-    client:visible 
-     width = "50%"
-    max_zoom = "70%"
-    image = {pois5}
-    texto = "Histográma de frecuencias para las probabilidades "
-     /> 
-     <center><h2>Ejemplo de una distribución de Poisson en Excel</h2></center>
-     <br />
-             <Video
-       id="PCDCsterSY4"
-       title="La distribución de Poisson en Excel" client:visible/> 
+      client:visible
+      width="40%"
+      max_zoom="70%"
+      image={dist1}
+      texto="Histográma de frecuencias para pesos de 1000 novillos "
+    />
 
+    <Paragraph
+      texto="El histograma representa de manera gráfica como se distribuyen los datos. En el gráfico superior se observa como la mayoría de los datos están concentrados al medio con mas de cien animales por intervalo (eje Y), mientras que los extremos (valores mínimos y máximos) obedecen a unos pocos animales con menos de 20 animales por intervalo.  Esto nos podría indicar que el peso de los novillos obedece al parámetro de una curva de distribución normal como lo veremos mas adelante. Las distribuciones las utilizamos para conocer los valores aleatorios que una variable puede tomar en un experimento o en una muestra y la frecuencia con la que ellas ocurren. Del ejemplo anterior podríamos deducir que es muy probable que un animal que escojamos al azar de esa muestra, su peso va a estar mas hacia los intervalos del medio que hacia los extremos."
+    />
+  </SubChapter>
+  <SubChapter id="glosario">
+    <SubTitle title="4.2- Repasemos algunas definiciones" />
+    <Paragraph>
+      <ul>
+        <li>
+          <b>- Frecuencia</b>: es el número de veces en que un valor determinado
+          o un resultado se repite durante el experimento o aparece en el <a
+            href={"/probabilidades#glosario"}><u>espacio muestral</u></a
+          >. Normalmente se representa por medio de un histograma.
+        </li>
+        <li>
+          <b>- Probabilidad de una distribución de frecuencia</b>: es una
+          colección de las probabilidades de los posibles resultados de un
+          evento.
+        </li>
+        <li>
+          <b>- Función de la probabilidad</b>: es una función que asigna una
+          probabilidad a cada distinto resultado en el espacio muestral. Donde:
+          Y = resultado actual, y = es uno de los posibles resultados de Y o sea
+          uno de los valores dentro de la distribución. Entonces, <center
+            ><h4>P(Y = y) = p(y)</h4></center
+          >
+        </li>
+        <li>
+          <b>- Población</b>: es el conjunto formado por todos los valores
+          posibles que puede asumir la variable objeto de estudio. Ejemplo: la
+          producción de leche de todas las vacas de la región lechera de un
+          país.
+        </li>
+        <li>
+          <b>- Muestra</b>: es cualquier subconjunto de la población escogido al
+          seguir ciertos criterios de selección. Ejemplo: La producción de leche
+          de las vacas del 10% de las fincas de la región lechera.
+        </li>
+      </ul>
+    </Paragraph>
+  </SubChapter>
+  <SubChapter id="discretas">
+    <SubTitle title="4.3- Distribuciones discretas" />
+    <Paragraph>
+      <p>
+        Una distribución discreta es un una distribución de probabilidad que
+        muestra la ocurrencia de resultados que se pueden contar (<a
+          href="https://www.investopedia.com/terms/d/discrete-distribution.asp"
+          ><u>Young, 2021</u></a
+        >) por ejemplo el total de animales nacidos vivos en una camada de
+        cerdos (1,2,3,...,14) o la probabilidad de que una cerda esté vacía o
+        preñada (0 o 1). Las probabilidades discretas tienen un número finito de
+        resultados, los valores que toma la variable son unidades (1 caballo por
+        pesebrera, 50000 células somáticas por mililitro de leche). Los
+        resultados de la distribución discreta se visualizan en forma tabular en
+        barras alineadas una después de la otra
+      </p>
+    </Paragraph>
+    <SubTitle title="4.3.1- Distribuciones discretas - Uniforme" />
+    <Paragraph
+      texto="Es tal vez la distribución discreta mas simple, ya que cada variable tiene las mismas probabilidades de ocurrir."
+    />
+    <Paragraph>
+      <p>Las principales propiedades de la distribución uniforme son:</p>
+      <ul>
+        <li>* Todos los resultados tienen la misma probabilidad.</li>
+        <li>* Todas las barras en el gráfico tienen la misma altura.</li>
+        <li>* El valor esperado y la varianza no tienen poder predictivo.</li>
+      </ul>
+      <br />
+      <p>
+        Ejemplo: si tenemos en un corral 4 novillas cada una de color diferente
+        (blanca, negra, parda, roja), ¿Cual es la probabilidad de que salga la
+        novilla blanca?
+      </p>
+    </Paragraph>
+    <ImagePlus
+      client:visible
+      width="30%"
+      max_zoom="50%"
+      image={uniform1}
+      texto="Distribución uniforme "
+    />
+    <Paragraph
+      texto="Entonces, según la formula general de la probabilidad, la novilla blanca tiene ¼ o 25% de probabilidad de salir, esta es la misma probabilidad para cada una de las restantes novillas, donde:"
+    />
+    <center><h4>1/4+1/4+1/4+1/4 = 1</h4></center>
 
-<DownloadButton link = "https://github.com/HectorDR/vetDataScience/blob/hojas_excel/4.3.4_Dist_Poisson.xlsx?raw=true" client:visible/>    
-    </SubChapter>
+    <Paragraph
+      texto="No podemos calcular la media, no hay varianza y no hay interés en hacer alguna predicción.   Como podemos ver en el gráfico anterior cada color tiene exactamente la misma probabilidad de ser escogido (25% c/u)."
+    />
 
-    <ReferencesBlock>
-        <li>* Chao, L.L., 1978. Estadística para las ciencias administrativas. McGraw-Hill Interamericana.</li>
-        <li><a href="https://economipedia.com/definiciones/distribucion-binomial.html">* Marco Sanjuán, F.J. 2017. <u>Distribución binomial.</u>  Economipedia.com</a></li>
-        <li>* Pfaffenberger, R.C. and Patterson, J.H., 1977. Statistical methods for business and economics. Homewood, IL: Richard D. Irwin.</li>
-        <li><a href="https://www.investopedia.com/terms/d/discrete-distribution.asp">* Young Julie, 2021. <u>Discrete Distribution</u>. Investopedia.com </a></li>
-    </ReferencesBlock>
+    <ImagePlus
+      client:visible
+      width="30%"
+      max_zoom="50%"
+      image={uniform2}
+      texto="Histograma de frecuencias dist. Uniforme "
+    />
+    <DownloadButton
+      link="https://github.com/HectorDR/vetDataScience/blob/hojas_excel/4.3.1_Dist_Uniforme.xlsx?raw=true"
+      client:visible
+    />
+  </SubChapter>
+
+  <SubChapter id="bernoulli">
+    <SubTitle title="4.3.2- Distribuciones discretas - Bernoulli" />
+    <Paragraph
+      texto="Es una distribución que consiste en un solo ensayo y únicamente dos posibles resultados -éxito o fracaso-.  En la distribución de Bernoulli no hay forma de predecir el resultado. El ejemplo típico es lanzar la moneda al aire. En un lanzamiento (experimento) solo hay una posibilidad entre dos cara o sello."
+    />
+    <Paragraph
+      texto="Esta distribución tiene por características principales que solo acepta un ensayo y solo hay dos posibles resultados (fracaso o error) "
+    />
+
+    <Paragraph texto="La fórmula de la probabilidad de Bernoulli es:" />
+    <center><h4>Var(Y) = p *(1-p)</h4></center>
+    <br />
+    <Paragraph
+      texto=" A menudo se utiliza la distribución de Bernoulli para determinar el resultado que se espera de un solo ensayo. Ejemplo: una vaca inseminada solo tiene dos posibilidades al chequear: preñada o vacía."
+    />
+  </SubChapter>
+
+  <SubChapter id="binomial">
+    <SubTitle title="4.3.3- Distribuciones discretas-Binomial" />
+    <Paragraph>
+      <p>
+        La distribución binomial es una secuencia de eventos Bernoulli
+        (éxito-fracaso) de la misma naturaleza. Es decir la distribucion
+        binomial repite un experimento <b>n</b> veces y cuantifica los éxitos y los
+        fracasos.
+      </p>
+      <b>Características:</b>
+      <ul>
+        <li>
+          * Mide la frecuencia de ocurrencia de uno de los posibles resultados
+          sobre los n ensayos. Para cada ensayo solo son posibles dos resultados
+          (éxito o fracaso).
+        </li>
+        <li>
+          * La probabilidad de éxito debe ser constante (p) y la probabilidad de
+          fracaso igualmente es constante y se representa por 1-p.
+        </li>
+        <li>
+          * Cada experimento es independiente del anterior, lo que ocurre en uno
+          no afecta el resultado del otro.
+        </li>
+      </ul>
+    </Paragraph>
+    <p>La fórmula de la distribución binomial es:</p>
+    <ImagePlus
+      client:visible
+      width="30%"
+      max_zoom="50%"
+      image={bin1}
+      texto="Fórmula de la distribución Binomial "
+    />
+    <Paragraph>
+      <p>
+        Donde: <b>
+          <ul>
+            <li>n = número de ensayos/experimentos</li>
+            <li>x = número de éxitos</li>
+            <li>p= probabilidad de éxito</li>
+            <li>(1-p) = probabilidad de fracaso</li>
+          </ul></b
+        >
+        <br />
+        El resultado entre paréntesis es el resultado de una combinación sin repetición
+        Cn,x donde:
+      </p>
+    </Paragraph>
+    <ImagePlus
+      client:visible
+      width="30%"
+      max_zoom="50%"
+      image={bin2}
+      texto=" "
+    />
+    <Paragraph>
+      <p>
+        Ejemplo, En una finca porcícola la actividad reproductiva se realiza por
+        inseminación artificial. Actualmente La tasa de preñez es del 65%. Si
+        tenemos un lote de 6 cerdas para inseminar. ¿Cuál es la probabilidad de
+        que 4 de estas cerdas queden preñadas? Entonces:
+      </p>
+      <br />
+      <b>
+        <ul>
+          <li>n = 6</li>
+          <li>x = 4</li>
+          <li>p = 65%</li>
+          <li>entonces 1 - p = 35%</li>
+        </ul></b
+      >
+    </Paragraph>
+
+    <ImagePlus
+      client:visible
+      width="40%"
+      max_zoom="60%"
+      image={bin3}
+      texto=" "
+    />
+    <Paragraph
+      texto="Aproximadamente es del 33% la probabilidad de preñar 4 cerdas dentro de las 6 que se van a inseminar. Si calculamos la probabilidad de que las cerdas inseminadas queden preñadas, podemos ver la distribución de probabilidades en el siguiente gráfico y deducir que hay mayores probabilidades de preñar entre 3 y 5 animales con los actuales resultados."
+    />
+    <ImagePlus
+      client:visible
+      width="40%"
+      max_zoom="60%"
+      image={bin4}
+      texto="Histograma de frecuencias distribución binomial "
+    />
+    <center><h2>Que es la la distribución Binomial</h2></center><br />
+    <Video
+      client:visible
+      id="X4OMdHx6rUk"
+      title="Explicación de la distribución Binomial"
+    />
+  </SubChapter>
+  <SubChapter id="binexcel">
+    <SubTitle title="4.3.3.1- Distribucion Binomial en Excel" />
+    <Paragraph
+      texto="A pesar de que las fórmulas para calcular las probabilidades de la distribución binomial son relativamente sencillas, la realidad es que realizar estos cálculos en una calculadora normal toman tiempo.  Afortunadamente, podemos hacerlo de manera sencilla y rápida en Excel. Para ello lo primero que debemos tener son los datos en una tabla  divididos en éxitos y fracaso. Por ejemplo retomando nuestro ejemplo de las preñeces de las sección anterior, si construimos una tabla para  6 animales, si las 6 estan preñadas (éxitos), en la siguiente columna de vacias pues tendremos 0 fracasos, en la siguiente fila, si hay 5 preñadas, entonces habrá 1 vacía (fracaso) y así sucesivamente hasta las 6 vacías y 0 preñadas.  Tambien debemos incluir el numero de experimentos n, en este caso son 6 cerdas para escoger. También sabemos por el histórico que la probabilidad p es del 65%, que es el porcentaje de preñeces en el lote y finalmente los éxitos esperados (de 6 hasta 0). Tal como se observa en la tabla inferior"
+    />
+
+    <ImagePlus
+      client:visible
+      width="25%"
+      max_zoom="50%"
+      image={binex1}
+      texto="Tabla de éxitos y fracasos para preñeces "
+    />
+    <Paragraph>
+      <p>
+        La función de Excel para calcular la distribución binomial se usa la
+        función <b>DISTR.BINOM o BINOM.DIST</b> en inglés. Si revisamos la captura
+        de pantalla que se encuntra en la parte inferior, primero nos ubicamos en
+        la celda donde deseamos ver el valor (D10), y ahí llamamos la función (=DISTR.BINOM)
+        y la función nos solicita el número de éxitos que se encuentran en la celda
+        B10, luego los ensayos (C5), seguido la probabilidad (C6) y finalmente la
+        opción verdadero (true) si queremos la función acumulada o falso(para el
+        valor específico), en este caso decidimos falso.
+      </p>
+    </Paragraph>
+    <ImagePlus
+      client:visible
+      width="40%"
+      max_zoom="60%"
+      image={binex2}
+      texto="Asignación de valores en excel (ubicando las celdas) para calcular el resultado de la distribución binomial "
+    />
+    <Paragraph>
+      <p>
+        Una vez tenemos los valores asignados damos enter y corremos la función
+        para todas las posibilidades que deseamos calcular sin olvidar asegurar
+        los valores del número de experimentos y probabilidad de éxito (animales
+        preñados). Por ejemplo, para la celda C5 donde se ubica el numero de
+        experimentos, la aseguramos con la opción <b>command + t</b> en una Mac u
+        <b>option + 4</b> desde un equipo que corra en ambiente Windows. El signo
+        $ debe aparecer antes de las coordenadas de la celda como se observa en la
+        barra de visualización en el recuadro superior.
+      </p>
+    </Paragraph>
+    <ImagePlus
+      client:visible
+      width="40%"
+      max_zoom="60%"
+      image={binex3}
+      texto="Porcentajes de la probabilidad de éxito/fracaso "
+    />
+    <Paragraph
+      texto="Como se observa en el recuadro superior, la columna de la derecha que fue la asignada para ver los resultados de la probabilidad, cada una de las combinaciones de éxito/fracaso esta dada por un porcentaje, por ejemplo la posibilidad de seleccionar 6 cerdas preñadas es tan solo del 7.5%. La suma de estas probabilidades debe dar 1 o = 100%"
+    />
+
+    <center><h2>Ejemplo de una distribución binomial en Excel</h2></center>
+    <br />
+    <Video
+      client:visible
+      id="MqyP0Bm2p4A"
+      title="La distribución Binomial en Excel"
+    />
+    <DownloadButton
+      link="https://github.com/HectorDR/vetDataScience/blob/hojas_excel/4.3.3_Dist_Binomial.xlsx?raw=true"
+      client:visible
+    />
+  </SubChapter>
+  <SubChapter id="poisson">
+    <SubTitle title="4.3.4- Distribuciones discretas-Poisson " />
+    <Paragraph
+      texto="Cuando queremos saber la probabilidad de un determinado evento Y, que ocurre en un intervalo de tiempo, distancia, área o volumen definidos usamos la distribución de Poisson."
+    />
+    <center><h2>Y∼℘(μ)</h2></center>
+    <br />
+    <Paragraph
+      texto="La distribución de Poisson solamente depende de un parámetro μ.  Tanto la media como la varianza de esta distribución son siempre positivas.  Se utiliza para determinar que tan posible es un resultado específico, conociendo con que frecuencia este evento ocurre usualmente. Con la distribución de Poisson podemos hacer planificación de espacios, tiempos, áreas o cualquier otro aspecto que implique un evento que ocurra en un espacio/tiempo/área determinada. Por ejemplo: "
+    />
+    <Paragraph>
+      <b>
+        <ul>
+          <li>
+            - Número de pacientes que necesitan cirugía en una clínica
+            veterinaria por día (planeación de quirófano).
+          </li>
+          <li>
+            - Número células somáticas por mililitro en leche (identificación de
+            problemas de mastitis clínica).
+          </li>
+          <li>
+            - Número de partos en una piara por mes (planificación de número de
+            parideras en la finca).
+          </li>
+        </ul></b
+      >
+    </Paragraph>
+    <h4><center>La fórmula de la distribución de Poisson es:</center></h4>
+    <ImagePlus
+      client:visible
+      width="30%"
+      max_zoom="50%"
+      image={pois}
+      texto="Distribución de poisson "
+    />
+    <Paragraph>
+      donde: <b>
+        <ul>
+          <li>P(Y=y) es la probabilidad de y en el intervalo definido</li>
+          <li>μ es el valor esperado o media de y</li>
+          <li>e es la base de los logaritmos naturales (2.71828)</li>
+        </ul></b
+      >
+      <br />
+      Ejemplo: en una producción porcina el promedio de partos a la semana es de
+      8 (tasa de partos del 85% y 2.4 camadas/año). Si se mantienen los mismos índices
+      cual es la probabilidad de tener 12 partos en una semana sabiendo que en este
+      momento la máxima capacidad planeada de parideras es de hasta 11 partos?<br
+      /><br />
+      <b>
+        <ul>
+          <li>y= 12 partos/s</li>
+          <li>μ = 8 partos/s</li>
+        </ul></b
+      >
+    </Paragraph>
+    <ImagePlus
+      client:visible
+      width="40%"
+      max_zoom="70%"
+      image={pois2}
+      texto="Fórmula de Poisson "
+    />
+
+    <Paragraph
+      texto="A pesar de que la probabilidad no es tan alta (~5%), si proyectamos esa probabilidad a un año es posible que en aproximadamente 3 semanas al año (2.6) se nos presente este problema y si se incrementa la tasa de partos, pues seguramente el propietario se verá forzado a incrementar la capacidad instalada. Pero por ahora tal vez no haya necesidad de ampliar si existen otras prioridades."
+    />
+    <Paragraph>
+      <p>
+        Al igual que con la distribución Binomial, Excel nos permite calcular
+        las probabilidades de esta distribución utilizando la función <b
+          >DISTR.POISSON o POISSON.DIST</b
+        > en inglés. Entonces si queremos construir este tipo de distribución en
+        Excel, lo mas práctico es hacer una tabla con los valores para los cuales
+        deseamos calcular la probabilidad e incluir la media. Como se muestra en
+        la ilustración, nos ubicamos en la celda donde deseamos ubicar la probabilidad,
+        se escribe la función <b>=POISSON.DIST</b>. Si observamos la captura de
+        pantalla ubicada en la parte inferior La función nos va primeo a pedir
+        que insertemos la probabilidad de que ocurra el evento. Esta está
+        ubicada en la celda C7 (probabilidad de un parto a la semana), luego la
+        media de partos semanales que está en la celda C4 y finalmente la opción
+        acumulativa (TRUE o VERDADERO) o si no queremos acumulados FALSO
+        (FALSE).
+      </p>
+    </Paragraph>
+    <ImagePlus
+      client:visible
+      width="40%"
+      max_zoom="60%"
+      image={pois3}
+      texto="Poisson en Excel "
+    />
+
+    <Paragraph>
+      <p>
+        Realizamos el mismo procedimiento para los demás valores (estiramos la
+        función) tal como hicimos con la distribución
+        <a href={"/distribuciones#binexcel"}><u>Binomial</u></a> y de esta manera
+        obtenemos nuestra tabla con las probabilidades de partos a la semana:
+      </p>
+    </Paragraph>
+    <ImagePlus
+      client:visible
+      width="40%"
+      max_zoom="60%"
+      image={pois4}
+      texto="Probabilidades para x número de partos a la semana, siguiendo la distribución de Poisson "
+    />
+    <p>
+      <center
+        ><b
+          >Utilizando el diagrama de barras podemos visualizar la curva de la
+          distribucion de Poisson para el ejemplo anterior</b
+        ></center>
+    </p>
+    <br />
+    <ImagePlus
+      client:visible
+      width="50%"
+      max_zoom="70%"
+      image={pois5}
+      texto="Histográma de frecuencias para las probabilidades "
+    />
+    <center><h2>Ejemplo de una distribución de Poisson en Excel</h2></center>
+    <br />
+    <Video
+      id="PCDCsterSY4"
+      title="La distribución de Poisson en Excel"
+      client:visible
+    />
+
+    <DownloadButton
+      link="https://github.com/HectorDR/vetDataScience/blob/hojas_excel/4.3.4_Dist_Poisson.xlsx?raw=true"
+      client:visible
+    />
+  </SubChapter>
+
+  <ReferencesBlock>
+    <li>
+      * Chao, L.L., 1978. Estadística para las ciencias administrativas.
+      McGraw-Hill Interamericana.
+    </li>
+    <li>
+      <a href="https://economipedia.com/definiciones/distribucion-binomial.html"
+        >* Marco Sanjuán, F.J. 2017. <u>Distribución binomial.</u> Economipedia.com</a>
+    </li>
+    <li>
+      * Pfaffenberger, R.C. and Patterson, J.H., 1977. Statistical methods for
+      business and economics. Homewood, IL: Richard D. Irwin.
+    </li>
+    <li>
+      <a href="https://www.investopedia.com/terms/d/discrete-distribution.asp"
+        >* Young Julie, 2021. <u>Discrete Distribution</u>. Investopedia.com
+      </a>
+    </li>
+  </ReferencesBlock>
 </ChapterLayout>

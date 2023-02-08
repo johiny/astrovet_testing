@@ -4,5 +4,4 @@ export const headervisible = atom(false)
 
 export const headerVisibleChanger = (state) => {
 headervisible.set(state)
-console.log(headervisible)
 }

@@ -1,5 +1,5 @@
 ---
-import Form from "../components/Form";
+import FormContainer from "../components/FormContainer.astro";
 import Chapters from "../components/Chapters";
 import home_video_2 from "../media/videos/home_video_2.mp4";
 import HomeCover from "../components/HomeCover";
@@ -22,7 +22,7 @@ import HeadBase from "../components/headBase.astro";
       <Chapters client:visible />
     </section>
     <section id="contact">
-      <Form client:only="react" />
+      <FormContainer/>
     </section>
   </div>
 </PageLayout>

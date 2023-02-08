@@ -1,10 +1,20 @@
 ---
-import MainLayout from "../layouts/MainLayout";
-import '../styles/style.css'
-import HeadBase from "../components/headBase.astro";
+import "../styles/style.css"
+import BarraDeNavegacion from '../components/BarraDeNavegacion'
+import Footer from '../components/Footer'
 ---
 
-<MainLayout client:only="react">
-    <slot/>
-</MainLayout>
+<div class='main_layout'>
+    <BarraDeNavegacion/>
+        <slot></slot>
+    <Footer/>
+</div>
 
+<script>
+    if(window.location.hash) {
+        const hashElement =  document.querySelector(window.location.hash)
+        if(hashElement){
+            hashElement.scrollIntoView(false);
+        }
+}
+</script>
