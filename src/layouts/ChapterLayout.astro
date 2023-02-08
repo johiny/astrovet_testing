@@ -1,0 +1,47 @@
+---
+import ChapterHead from '../components/ChapterHead'
+import LateralMenu from '../components/LateralMenu'
+import PageLayout from './PageLayout.astro'
+const {chapter_title, chapter_image} = Astro.props
+---
+
+<PageLayout>
+  <chapter-layout>
+    <div id="home">
+        <ChapterHead
+          titulo={chapter_title}
+          background={chapter_image}
+        />
+         <main class="inside_layout">
+          <LateralMenu client:load/>
+          <div class="main_content">
+              <slot></slot>
+          </div>
+          </main>
+     </div>
+    </chapter-layout>     
+</PageLayout>
+
+<script>
+  import { headerVisibleChanger } from './minicontext'
+  class ChapterLayout extends HTMLElement {
+    constructor() {
+      super();
+     const observer = new IntersectionObserver((entries)=> {
+      entries.forEach((entry) => {
+               if(entry.isIntersecting){
+                headerVisibleChanger(true)
+               }
+               else{
+                headerVisibleChanger(false)
+               }
+     })
+     })
+     const chapterheader = this.querySelector("div div.ChapterHead")
+     if(chapterheader){
+       observer.observe(chapterheader)
+    }
+}
+}
+  customElements.define('chapter-layout', ChapterLayout);
+</script>

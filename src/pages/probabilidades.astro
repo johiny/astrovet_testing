@@ -1,0 +1,482 @@
+---
+import ContentsTable from "../components/ContentsTable";
+import SubChapter from "../components/SubChapter";
+import Paragraph from "../components/Paragraph";
+import SubTitle from "../components/SubTitle";
+import ImageCorousel from "../components/ImageCorousel";
+import ImagePlus from "../components/ImagePlus";
+import ChapterLayout from "../layouts/ChapterLayout.astro";
+import ReferencesBlock from "../components/ReferencesBlock";
+import bufalas from "../media/photos_web/bufalos2.jpg";
+import probgral from "../media/photos_probs/prob_gral.png";
+import probind from "../media/photos_probs/prob_ind.png";
+import probind2 from "../media/photos_probs/prob_indII.png";
+import probind3 from "../media/photos_probs/prob_indIII.png";
+import probind4 from "../media/photos_probs/prob_indIV.png";
+import probind5 from "../media/photos_probs/prob_indV.png";
+import probdep from "../media/photos_probs/prob_dep.png";
+import perm from "../media/photos_probs/perm.png";
+import varnorep from "../media/photos_probs/var_no_rep.png";
+import varnorepII from "../media/photos_probs/var_no_repII.png";
+import varnorepIII from "../media/photos_probs/var_no_repIII.png";
+import varconrep from "../media/photos_probs/var_con_rep.png";
+import comb from "../media/photos_probs/comb.png";
+import combII from "../media/photos_probs/combII.png";
+import combIII from "../media/photos_probs/combIII.png";
+import bajar from "../media/images/bajar.png";
+import { HashLink } from "@xzar90/react-router-hash-link";
+import { Helmet } from "react-helmet-async";
+import DownloadButton from "../components/DownloadButton";
+import HeadBase from "../components/headBase.astro";
+---
+
+<HeadBase
+  title="3- Principios generales de probabilidades"
+  description="Principios generales de probabilidades"
+  keywords="probabilidades, permutaciones, combinaciones, variaciones"
+/>
+
+<ChapterLayout
+  chapter_title="3- Principios generales de probabilidades"
+  chapter_image={bufalas}
+>
+  <ContentsTable
+    contenidos={[
+      {
+        titulo: "3.1-¿Qué es una probabilidad y para que nos sirve?",
+        link: "#definicion",
+      },
+      { titulo: "3.2- Veamos algunos términos importantes", link: "#glosario" },
+      {
+        titulo: "3.3- Probabilidad de eventos independientes",
+        link: "#independientes",
+      },
+      {
+        titulo: "3.4- Probabilidad de eventos dependientes",
+        link: "#dependientes",
+      },
+      {
+        titulo: "3.5- Que son las permutaciones y como se calculan",
+        link: "#permutaciones",
+      },
+      {
+        titulo:
+          "3.6- Que son las variaciones y como se diferencian de las permutaciones",
+        link: "#variaciones",
+      },
+      { titulo: "3.7- Que son las combinaciones", link: "#combinaciones" },
+      {
+        titulo: "3.8- que es una probabilidad condicional",
+        link: "ProbabilidadesII#condicional",
+      },
+      {
+        titulo: "3.9- Regla de la probabilidad total",
+        link: "ProbabilidadesII#total",
+      },
+      { titulo: "3.10- Regla de la adición", link: "ProbabilidadesII#adicion" },
+      {
+        titulo: "3.11- Regla de la multiplicación",
+        link: "ProbabilidadesII#multiplicacion",
+      },
+      { titulo: "3.12- El teorema de bayes ", link: "ProbabilidadesII#bayes" },
+      {
+        titulo: "3.13- Probabilidades en genética cualitativa",
+        link: "ProbabilidadesIII#general",
+      },
+    ]}
+  />
+
+  <SubChapter id="definicion">
+    <SubTitle title="3.1- ¿Qué es una probabilidad y para que nos sirve?" />
+    <Paragraph
+      texto="Se podría pensar cual es la necesidad de revisar las probabilidades, si estamos desarrollando una introducción al análisis de los datos.  Pues precisamente, necesitamos entender que son y como se aplican para poder tomar decisiones. Con los datos que obtenemos, al transformarlos en información podemos encontrar explicaciones a situaciones de la finca que nos generan ineficiencias técnicas o económicas y de igual manera podemos ser realistas en cuanto a las expectativas en los proyectos que emprendamos para solucionarlas. Por eso las probabilidades son una perfecta introducción al análisis de datos. "
+    />
+    <Paragraph>
+      <p>
+        Podríamos definir una probabilidad como la medición de la posibilidad de
+        que un evento ocurra en una situación cuyo resultado no se puede
+        predecir hasta que sea observado (experimento aleatorio). La
+        probabilidad se cuantifica como un número entre 0 y 1, donde 0 indica
+        imposibilidad y 1 certitud
+        <a
+          href="https://towardsdatascience.com/basic-probability-theory-and-statistics-3105ab637213"
+          target="_blank"><u>(Radke, 2017)</u></a
+        >. Un ejemplo típico sería el sexo al nacer (XX o XY). En teoría la
+        probabilidad debería ser 50% de que nazca macho y 50% de que sea hembra
+        (enc condiciones naturales). El clásico ejemplo de una probabilidad es
+        al tirar al aire una moneda cuales son las probabilidades de obtener
+        cara o sello. Entonces otra manera de definir la probabilidad es un
+        cálculo matemático que evalúa las posibilidades de que una cosa suceda
+        cuando interviene el azar
+        <a
+          href="https://www.smartick.es/blog/matematicas/probabilidad-y-estadistica/probabilidad-que-es/"
+          target="_blank"><u>(Molina, 2021)</u></a
+        >.
+      </p>
+    </Paragraph>
+    <Paragraph
+      texto="Conocer de probabilidades nos ayuda a entender cuales son las reales posibilidades de que un evento suceda de una manera calculada y evitar o reducir el riesgo.  Por ejemplo, suponga que se desea analizar si debe cambiar el técnico inseminador de sus vacas, para ello uno de los criterios mas importantes seria calcular el porcentaje de éxito del técnico actual (animales preñados/animales inseminados) frente a los posibles candidatos. Además habria que ver el valor adicional que se estaría dispuesto a pagar por los servicios del nuevo técnico.  Si el técnico A tiene un record del 60%, el B tiene un record del 58% y el C del 65% seria fácil escoger el C.  Sin embargo, hay que tener aquí en cuenta otros factores, como las instalaciones de la finca, la calidad del semen utilizado y la condición de las vacas entre otras. Recapitulando entonces, la probabilidad es medir la posibilidad de que un evento ocurra. Para el evento aún no conocemos el resultado, pero basados en la información previa podemos determinar cual es la posibilidad real que tenemos de obtener el resultado esperado."
+    />
+    <center><h4>La fórmula general de la probabilidad es:</h4></center>
+    <ImagePlus
+      client:visible
+      image={probgral}
+      max_zoom={"60%"}
+      texto="Fórmula general de la probalidad"
+    />
+    <Paragraph
+      texto="Donde la probabilidad de que ocurra el evento X es igual al número de veces en que ocurrió el evento que esperábamos (X) sobre el total de veces en que se intentó el ensayo o experimento (espacio muestral). "
+    />
+  </SubChapter>
+
+  <SubChapter id="glosario">
+    <SubTitle title="3.2- Repasemos algunas definiciones" />
+    <br />
+    <ul>
+      <li>
+        -<b> Ensayo</b>: observar la ocurrencia del evento y registrar el
+        resultado. Por ejemplo el nacimiento de una ternera y registrarlo o
+        registrar en una incubadora la cantidad de pollitos machos y hembras
+        nacidos en el mismo lote.
+      </li>
+      <li>
+        -<b> Experimento</b>: es un grupo de uno o múltiples ensayos. Por
+        ejemplo, registrar el sexo de los terneros en 1000 nacimientos.
+        Recordemos que el experimento es aleatorio porque no podemos predecir el
+        resultado hasta tanto no es observado.
+      </li>
+      <li>
+        -<b> Probabilidad experimental:</b> la probabilidad que asignamos a un evento
+        basados en el experimento conducido. Ejemplo, luego de haber registrado el
+        sexo de 1000 terneros al nacer, basados en los resultados esperamos que haya
+        un 50.4% de posibilidades de que sea hembra.
+      </li>
+      <li>
+        -<b> Valor esperado:</b> el resultado especificado que esperamos cuando conducimos
+        un experimento. En este caso el valor esperado del experimento será el número
+        de hembras o machos que esperamos después de 1000 nacimientos.
+      </li>
+      <li>
+        -<b> El espacio muestral</b> es la cantidad de posibles resultados de un
+        experimento aleatorio. Es decir, la cantidad de veces en que corremos el
+        experimento.
+      </li>
+    </ul>
+  </SubChapter>
+  <SubChapter id="independientes">
+    <SubTitle title="3.3- Probabilidades de dos eventos independientes" />
+    <Paragraph
+      texto="Dos eventos son independientes si el resultado del segundo evento NO es afectado por el resultado del primer evento y viceversa. Si A y B son eventos independientes, la probabilidad de que el evento ocurra es el producto (multiplicación) de la probabilidad de cada evento individual. Donde la probabilidad de A no es igual a 0 y la probabilidad de B no es igual a 0."
+    />
+    <center><h4>Función de dos eventos independientes</h4></center>
+    <ImagePlus
+      client:visible
+      image={probind}
+      max_zoom={"60%"}
+      texto="Eventos independientes"
+    />
+    <center
+      ><p>
+        <b></b>Donde la probabilidad de A dado B es igual a la probabilidad de A
+        y la probabilidad de B dado A es igual a la probabilidad de B
+      </p></center
+    >
+    <br />
+    <Paragraph
+      texto="Para entender un poco mas las probabilidades independientes, vamos a desarrollar un ejemplo. Supongamos que tenemos dos corrales completamente separados y en cada corral hay cuatro vacas cada una de diferente color (blanca, negra, pintada, parda). Si vamos a seleccionar un animal de cada corral ¿Cual es la posibilidad de que salgan un animal blanco del corral A y un animal blanco del corral B?"
+    />
+
+    <center
+      ><h4>
+        Fórmula para calcular la probabilidad de dos eventos independientes
+      </h4></center
+    >
+    <ImageCorousel
+      client:visible
+      width={"40%"}
+      max_zoom={"60%"}
+      images={[
+        {
+          image: probind2,
+          texto:
+            "Donde la probabilidad de A y B es igual a la probabilidad de A multiplicada por  la probabilidad de B",
+        },
+        {
+          image: probind3,
+          texto:
+            "Probabilidad de sacar un animal blanco del corral A y un animal blanco del corral B",
+        },
+      ]}
+    />
+    <Paragraph
+      texto="En este caso el espacio muestral es 16, pues hay un total de 16 combinaciones posibles. Sin embargo, si vemos el cuadro la posibilidad de que en cada corral sea seleccionada la ternera blanca al tiempo, es 1 en 16 (cuadro verde).  En otras palabras la probabilidad de sacar una novilla blanca del corral 1 es 1/4 y del corral dos igualmente 1/4 entonces la probabilidad de que de ambos corrales se escoja un animal blanco  es 1/4 * 1/4 = 1/16"
+    />
+
+    <Paragraph
+      texto="También nos puede interesar cuál es posibilidad de que el animal elegido del corral A sea de color blanco blanco, mientras que del segundo corral el animal elegido sea de cualquier color?"
+    />
+    <ImagePlus
+      client:visible
+      image={probind4}
+      texto="Un animal blanco del corral A y uno de cualquier color del B"
+    />
+    <Paragraph
+      texto="Como vemos el espacio muestral es 16, si observamos el recuadro superior podemos deducir que la posibilidad de que el animal elegido en el primer corral sea blanco y el del segundo corral sea de cualquier color es 1/4 (espacios en azul). Matematicamente esto está dado por  1/4 para un animal blanco en el primer corral y 4/4 para el corral dos, por tanto tendremos (1/4)*(4/4) = 4/16, es decir la probabilidad de A y B será de 1/4  "
+    />
+    <Paragraph
+      texto="¿que posibilidad de que los animales elegidos en ambos corrales sean de cualquier color diferente al blanco?"
+    />
+    <ImagePlus
+      client:visible
+      image={probind5}
+      texto="Obtener de ambos corrales animales de cualquier color excepto blanco"
+    />
+    <Paragraph
+      texto="Si contamos las celdas amarillas del cuadro, podemos deducir que La probabilidad de escoger un animal de cualquier color diferente al blanco en ambos corrales es de 9/16. Entonces para cada corral la probabilidad de no seleccionar blanco es 3/4, por tanto tendremos (3/4)*(3/4) = 9/16, es decir la probabilidad de A y B será de 9/16.  "
+    />
+    <DownloadButton
+      link="https://github.com/HectorDR/vetDataScience/blob/hojas_excel/3.3_Probs_Independientes.xlsx?raw=true"
+      client:visible
+    />
+  </SubChapter>
+  <SubChapter id="dependientes">
+    <SubTitle title="3.4- Probabilidades de dos eventos Dependientes" />
+    <Paragraph
+      texto="Dos eventos son dependientes si el resultado del primer evento afecta la probabilidad del segundo evento así que la probabilidad cambia. Sin embargo al igual que en las probabilidades independientes, la probabilidad de que ambos eventos ocurran es el producto de las probabilidades de los eventos individuales."
+    />
+    <Paragraph
+      texto="Por ejemplo, estamos trabajando en otro corral y tenemos 10 novillas, 6 blancas y 4 negras. ¿Si la primera novilla en salir es negra, cual es la probabilidad de que la segunda novilla sea blanca? La probabilidad de que la primera novilla sea negra era 4/10 (cuatro novillas negras de un total de 10 novillas). Sin embargo, para el segundo animal ya las probabilidades han cambiado pues no tenemos 10 sino 9 animales en total, por tanto, el segundo evento es dependiente del primero. Como la primera novilla fue negra, todas las novillas blancas aun se encuentran en el corral, pero tenemos una novilla menos en total, entonces, la probabilidad de que la segunda novilla sea blanca es 6/9 o seis novillas blancas de un total de 9 novillas restantes "
+    />
+    <ImagePlus
+      client:visible
+      width="30%"
+      max_zoom="50%"
+      image={probdep}
+      texto="Probabilidad de seleccionar de un total de 10 novillas primero una novilla negra, seguida de una novilla blanca"
+    />
+    <p>
+      <center
+        ><b>
+          Como vemos entonces al multiplicar la probabilidad de que salga una
+          novilla negra de primera y luego una novilla blanca será del 26%.
+        </b></center>
+    </p>
+    <DownloadButton
+      link="https://github.com/HectorDR/vetDataScience/blob/hojas_excel/3.4_Probs_dependientes.xlsx?raw=true"
+      client:visible
+    />
+  </SubChapter>
+  <SubChapter id="permutaciones">
+    <SubTitle title="3.5- Que son las permutaciones y como se calculan" />
+    <Paragraph>
+      <p>
+        Las permutaciones hacen referencia al número total de las diferentes
+        posibles maneras en que podemos organizar un determinado número de
+        elementos. Las permutaciones siempre se representan por los números
+        factoriales.
+        <b>
+          En las permutaciones SI importa el orden ya que el intercambio entre
+          dos elementos distintos genera una nueva permutación. En las
+          permutaciones NO se repiten los elementos, ya que de repetirse o ser
+          iguales entre si, no se genera una nueva permutación.
+        </b>
+        En las permutaciones simpre tenemos igual número de espacios para igual número
+        de elementos.
+      </p>
+    </Paragraph>
+    <center><h4>La fórmula para representar las permutaciones es:</h4></center>
+    <br />
+    <center><h2>Pn = n!</h2></center>
+    <Paragraph
+      texto="Donde la probabilidad de n esta dado por el n factorial. Por ejemplo, Tenemos 5 pesebreras y 5 caballos, de cuantas maneras posibles podemos organizar los caballos en el establo?.  Tenemos que acomodar un caballo por pesebrera (no hay repeticiones)."
+    />
+    <ImagePlus
+      client:visible
+      image={perm}
+      texto="Permutación para 5 caballos en 5 pesebreras"
+    />
+    <Paragraph
+      texto="Entonces, existen 120 posibles maneras de organizar los caballos en los establos. Es importante tener en cuenta que en las permutaciones todos los elementos están organizados en el mismo espacio  y que no existen repeticiones (no se puede acomodar el mismo animal en dos pesebreras al mismo tiempo). Entonces en la permutación estamos organizando un numero n de elementos en un determinado numero de espacios y ni los elementos, ni los espacios son repetibles. En las permutaciones se organizan todos los elementos que hay disponibles."
+    />
+    <DownloadButton
+      link="https://github.com/HectorDR/vetDataScience/blob/hojas_excel/3.5_Permutaciones.xlsx?raw=true"
+      client:visible
+    />
+  </SubChapter>
+  <SubChapter id="variaciones">
+    <SubTitle title="3.6- Que son las variaciones y como se calculan" />
+    <Paragraph
+      texto="Las variaciones representan el numero de las diferentes posibles maneras en que se pueden seleccionar un p número de elementos que pertenecen a un grupo n.  En las variaciones ordinarias a diferencia de las permutaciones, no entran todos los elementos, solo se selecciona un p número de un total n. Si importa el orden y no hay repetición del mismo elemento (la vaca no vuelve al corral), aunque también existe un tipo de variaciones con repetición como veremos mas adelante. "
+    />
+
+    <SubTitle title="3.6.1- Variaciones sin repeticiones" />
+    <Paragraph>
+      <p>
+        Se da cuando tenemos determinado número de elementos n y un número
+        limitado de posiciones p para asignar.
+        <b> Ojo en este caso no puede haber repeticiones.</b> Por ejemplo tenemos
+        3 elementos A, B y C y deseamos seleccionar solamente 2, de cuantas maneras
+        podremos seleccionar<b> solo dos de los tres elementos disponibles?.</b>
+        Las combinaciones que serían posibles son: AB AC BA BC CA CB es decir tenemos
+        seis posibles maneras de combinar dos extracciones (n) de tres posibles diferentes
+        elementos (M).
+      </p>
+    </Paragraph>
+    <center
+      ><h4>Fórmula general de las variaciones sin repecicion es:</h4></center
+    >
+    <ImageCorousel
+      client:visible
+      width={"30%"}
+      max_zoom={"50%"}
+      images={[
+        {
+          image: varnorep,
+          texto: "Variaciones sin repeticiones",
+        },
+        {
+          image: varnorepII,
+          texto:
+            "Variaciones para dos posiciones con tres elementos sin repetición",
+        },
+      ]}
+    />
+
+    <Paragraph
+      texto="Donde V son las variaciones, n es el numero total de elementos en el espacio muestral y p es el número de elementos que necesitamos disponibles a seleccionar.  Entonces  para extraer el primer elemento tenemos 3 opciones (n), mientras que para el segundo elemento las opciones se reducen a 2 (n-1)  porque no podemos repetir la unidad con la cual iniciamos. Tenemos cada vez menos opciones por cada elemento adicional.  "
+    />
+    <Paragraph
+      texto="Ejemplo:  Deseamos escoger 4 novillas de 10 disponibles para una exhibición. Los diez animales tienen características fenotípicas y genotípicas muy similares entre ellas, razón por la que la selección se hace difícil. Entonces, cuantas son las posibles variaciones que tenemos, seleccionando solo 4 (p) de las 10 (n)?  Como es una exhibición, el orden de selección es importante."
+    />
+    <ImagePlus
+      client:visible
+      width="40%"
+      max_zoom="60%"
+      image={varnorepIII}
+      texto="Seleccionar 4 novillas de 10 posibles teniendo en cuenta el orden"
+    />
+    <Paragraph
+      texto="Entonces, tendremos 5039 diferentes maneras de seleccionar los 4 animales dentro de los 10 disponibles, esto siempre y cuando el orden asignado sea de importancia.  "
+    />
+    <SubTitle title="3.6.2- Variaciones con repeticiones" />
+    <Paragraph
+      texto="En las variaciones con repetición, tenemos diferentes agrupaciones con n elementos que pueden repetirse, es decir tenemos n opciones para el primer elemento p, y para el segundo elemento p también tenemos n opciones (a diferencia de n-1) y asi para cada elemento que se necesite organizar. A nivel de producción podemos pensar en la asginación de los registros a los animales.  Si tenemos los 10 dígitos del 0 al 9 y queremos asignar 6 digitos por animal registrado, hasta cuantas combinaciones podremos tener?"
+    />
+    <center><h4>Fórmula general para las variaciones con repeticion</h4></center
+    >
+    <ImagePlus
+      client:visible
+      width="25%"
+      max_zoom="50%"
+      image={varconrep}
+      texto="Seleccionar 4 novillas de 10 posibles teniendo en cuenta el orden"
+    />
+    <Paragraph>
+      <p>
+        Donde V representa las variaciones con repetición, n es el número de
+        elementos disponibles y p es el numero de elementos que estamos
+        organizando. Entonces en este caso n serian los 10 dígitos del 0 al 9 y
+        p serían los 6 dígitos a seleccionar. Entonces tendremos 10<sup>6</sup> =
+        1'000.000 de variaciones. Para el efecto de los registros no importa que
+        los números se repitan, es decir podemos tener un registro 111111 y es perfectamente
+        válido por eso utilizamos la formula con repetición, mientras que con animales
+        por ejemplo, no podemos utilizar la repetición como en el ejemplo anterior.
+      </p>
+    </Paragraph>
+  </SubChapter>
+  <SubChapter id="combinaciones">
+    <SubTitle title="3.7- Que son las combinaciones" />
+    <Paragraph>
+      <p>
+        Las<b>
+          combinaciones representan el numero de diferentes maneras posibles
+          como se pueden escoger un numero de elementos</b
+        >. En las combinaciones el orden de selección no es importante a
+        diferencia de las variaciones y no es posible la repetición (es igual
+        seleccionar ABC que CBA o BAC).
+      </p>
+    </Paragraph>
+    <center><h4>Fórmula general de las combinaciones</h4></center>
+    <ImagePlus
+      client:visible
+      width="25%"
+      image={comb}
+      texto="Fórmula de las combinaciones"
+    />
+    <Paragraph
+      texto="Donde C son las combinaciones, n es el numero total de elementos en el espacio muestral y p ese es el numero de elementos que necesitamos seleccionar. "
+    />
+    <Paragraph>
+      <p>
+        Si se van a seleccionar 4 novillas de las 10 disponibles para la feria
+        de exhibición, siguiendo el ejemplo que hicimos en la sección de<a
+          href={"#variaciones"}><u>variaciones sin repetición</u></a
+        > pero en este caso el orden no es importante, entonces cuantas posibles
+        combinaciones existen?.
+      </p>
+    </Paragraph>
+    <ImagePlus
+      client:visible
+      image={combII}
+      texto="Selección de animales sin importar el orden de salida"
+    />
+    <Paragraph
+      texto="Entonces despejando la fórmula, tendriamos un total de 210 combinaciones diferentes para seleccionar las 4 novillas. Un número inferior si comparamos con las 5039 variaciones cuando importa la posición. "
+    />
+
+    <SubTitle title="3.7.1- Combinaciones con espacios muestrales diferentes" />
+    <Paragraph
+      texto="Este tipo de combinaciones representa el numero de diferentes posibles combinaciones en que podemos escoger un determinado numero de elementos de dos o mas espacios muestrales. Ejemplo, si continuamos con nuestro ejemplo de los registros, donde encontramos 1'000.000 de posibles variaciones, que pasa si decidimos agregar 3 letras seleccionadas entre la A hasta la J (10 letras)?."
+    />
+    <center
+      ><h4>
+        Fórmula para combinaciones con espacios muestrales diferentes
+      </h4></center
+    >
+    <ImagePlus
+      client:visible
+      image={combIII}
+      texto="Fórmula para espacios muestrales diferentes"
+    />
+    <Paragraph
+      texto="Donde C representa las combinaciones, n1 es el tamaño del primer espacio muestral, n2 es el segundo espacio muestral etc. Es importante que la opción que escogemos en un espacion muestral no afecta el numero de opciones de los otros espacios. El orden en el que escogemos el elemento individual es arbitrario y necesitamos conocer el tamaño del espacio muestral para cada elemento individual  "
+    />
+    <Paragraph>
+      <p>
+        Entonces despejando la fórmula para continuar con nuestro ejemplo de
+        registos con números y letras, la primera parte es 10<sup>6</sup> * 10<sup
+          >3</sup
+        > = 10<sup>9</sup> posibles combinaciones. Si no necesitamos tantos registros,
+        creo que deberiamos considerar reducir el número de cifras en el primer espacio
+        muestral!.
+      </p>
+    </Paragraph>
+  </SubChapter>
+
+  <ReferencesBlock>
+    <li>
+      * Chao, L.L., 1978. Estadística para las ciencias administrativas.
+      McGraw-Hill Interamericana.
+    </li>
+    <li>
+      <a
+        href="https://www.smartick.es/blog/matematicas/probabilidad-y-estadistica/probabilidad-que-es/"
+        target="_blank"
+        >* Molina Susana, 2021, <u>
+          La Probabilidad que es y cómo la utilizamos el día a día</u
+        >. en portal Smartick.</a>
+    </li>
+    <li>
+      * Pfaffenberger, R.C. and Patterson, J.H., 1977. Statistical methods for
+      business and economics. Homewood, IL: Richard D. Irwin.
+    </li>
+    <li>
+      <a
+        href="https://towardsdatascience.com/basic-probability-theory-and-statistics-3105ab637213"
+        target="_blank"
+        >* Radke Paraga, 2017, <u>Basic Probability Theory and Statistics</u> , en
+        portal Towards Data Science.
+      </a>
+    </li>
+  </ReferencesBlock>
+</ChapterLayout>

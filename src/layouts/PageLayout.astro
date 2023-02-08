@@ -1,0 +1,10 @@
+---
+import MainLayout from "../layouts/MainLayout";
+import '../styles/style.css'
+import HeadBase from "../components/headBase.astro";
+---
+
+<MainLayout client:only="react">
+    <slot/>
+</MainLayout>
+

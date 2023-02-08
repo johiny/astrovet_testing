@@ -1,0 +1,28 @@
+---
+import Form from "../components/Form";
+import Chapters from "../components/Chapters";
+import home_video_2 from "../media/videos/home_video_2.mp4";
+import HomeCover from "../components/HomeCover";
+import HomeIntro from "../components/HomeIntro";
+import HomeVideo from "../components/HomeVideo";
+import PageLayout from "../layouts/PageLayout.astro";
+import HeadBase from "../components/headBase.astro";
+---
+
+<HeadBase title="Vet Análisis Datos" />
+<PageLayout>
+  <div class="home">
+    <HomeCover video={home_video_2} />
+    <section id="introduccion">
+      <HomeIntro />
+    </section>
+    <HomeVideo client:visible />
+    <section id="contents">
+      <h2 class="chapters_title">Capítulos</h2>
+      <Chapters client:visible />
+    </section>
+    <section id="contact">
+      <Form client:only="react" />
+    </section>
+  </div>
+</PageLayout>

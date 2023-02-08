@@ -1,0 +1,255 @@
+---
+import IndexTable from "../components/IndexTable";
+import perrito from "../media/photos_web/perrito.jpeg"
+import ChapterLayout from "../layouts/ChapterLayout.astro";
+import HeadBase from "../components/headBase.astro";
+---
+
+<HeadBase
+titulo="Tabla de Contenidos"
+/>
+
+<ChapterLayout chapter_title="Tabla de Contenidos" chapter_image={perrito} >      
+            <IndexTable
+            chapter_title="Acerca de este proyecto"
+            chapter_id="blog"
+              contenidos={[
+                {
+                  titulo: "I- Introducción",
+                  link: "blog#introduccion",
+                },
+                {
+                  titulo: "II- Objetivos y Requisitos",
+                  link: "blog#objetivos",
+                },
+                {
+                  titulo:
+                    "III- Metodología",
+                  link: "blog#metodologia",
+                },
+                
+                {
+                  titulo:
+                    "IV- Acerca del Autor",
+                  link: "blog#autor",
+                },
+                {
+                  titulo:
+                    "V- Agradecimientos",
+                  link: "blog#agradecimientos",
+                },
+              ]}
+            />
+            <IndexTable
+            chapter_title="1- Introducción al análisis de los datos"
+            chapter_id="post"
+              contenidos={[
+                {
+                  titulo: "1.1- Qué es el análisis y la ciencia de los datos",
+                  link: "post#definicion",
+                },
+                {
+                  titulo: "1.2- Qué son los datos crudos",
+                  link: "post#datos",
+                },
+                
+                {
+                  titulo:
+                    "1.3- Clasificación de los datos según su naturaleza",
+                  link: "post#raw",
+                },
+  
+              ]}
+            />
+          <IndexTable
+          chapter_title="2- Ejemplos prácticos para manejar los datos estructurados"
+            chapter_id="examples"
+              contenidos={[
+                {
+                  titulo: "2.1-Cómo crear campos con criterio de validación",
+                  link: "examples#fechas",
+                },
+                {
+                  titulo: "2.2- Cómo crear listas desplegables",
+                  link: "examples#listas",
+                },              
+                {
+                  titulo:
+                    "2.3- Cómo manejar los datos cuantitativos",
+                  link: "examples#cuantitativas",
+                },
+                {
+                  titulo:
+                    "2.4- Listas dependientes de otras -Madre e hijas- ",
+                  link: "examples#madrehija",
+                },
+                {
+                  titulo:
+                    "2.5- Cómo solucionar problemas con datos importados o secundarios",
+                  link: "examples#importados",
+                },
+                {
+                  titulo:
+                    "2.5.1- Inconsistencia en los terminos para referirse a un evento",
+                  link: "examples#importados",
+                },
+                {
+                  titulo:
+                    "2.5.2- Revisar los datos duplicados en los registros",
+                  link: "examples#duplicados",
+                },
+                {
+                  titulo:
+                    "2.5.3- Que hacer cuando hacen falta datos en los registros",
+                  link: "examples#missing",
+                },
+              ]}
+            />
+  
+          <IndexTable
+          chapter_title="3- Principios generales de las probabilidades"
+            chapter_id="probabilidades"
+           contenidos ={[
+                         { titulo:"3.1-¿Qué es una probabilidad y para que nos sirve?",
+                          link: "probabilidades#definicion"},
+                          { titulo:"3.2- Veamos algunos términos importantes",
+                          link: "probabilidades#glosario"},
+                          { titulo:"3.3- Probabilidad de eventos independientes",
+                          link: "Probabilidades#independientes"},
+                          { titulo:"3.4- Probabilidad de eventos dependientes",
+                          link: "probabilidades#dependientes"},
+                          { titulo:"3.5- Que son las permutaciones y como se calculan",
+                          link: "probabilidades#permutaciones"},
+                          { titulo:"3.6- Que son las variaciones y como se diferencian de las permutaciones",
+                          link: "probabilidades#variaciones"},
+                          { titulo:"3.7- Que son las combinaciones",
+                          link: "probabilidades#combinaciones"},
+                          { titulo:"3.8- que es una probabilidad condicional",
+                          link: "probabilidadesII#condicional"},
+                          { titulo:"3.9- Regla de la probabilidad total",
+                          link: "probabilidadesII#total"},
+                          { titulo:"3.10- Regla de la adición",
+                          link: "probabilidadesII#adicion"},
+                          { titulo:"3.11- Regla de la multiplicación",
+                          link: "probabilidadesII#multiplicacion"},
+                          { titulo:"3.12- El teorema de bayes ",
+                          link: "probabilidadesII#bayes"},
+                          { titulo:"3.13- Probabilidades en genética cualitativa",
+                          link: "probabilidadesIII#general"}
+  
+                      ]}/>          
+                      <IndexTable
+                      chapter_title="4- Cómo se distribuyen los datos y cual es su utilidad"
+            chapter_id="distribuciones"
+                       contenidos ={[
+                         { titulo:"4.1-¿Qué es la distribucion de una variable?",
+                          link: "distribuciones#definicion"},
+                          { titulo:"4.2- Veamos algunos términos importantes",
+                          link: "distribuciones#glosario"},
+                          { titulo:"4.3- Distribuciones discretas",
+                          link: "distribuciones#discretas"},
+                          { titulo:"4.3.1- Distribuciones discretas - Uniforme",
+                          link: "distribuciones#discretas"},
+                          { titulo:"4.3.2- Distribuciones discretas - Bernoulli",
+                          link: "distribuciones#bernoulli"},
+                          { titulo:"4.3.3- Distribuciones discretas - Binomial",
+                          link: "distribuciones#binomial"},
+                          { titulo:"4.3.3.1- Distribucion Binomial en Excel",
+                          link: "distribuciones#binexcel"},
+                          { titulo:"4.3.4- Distribucion discretas - Poisson",
+                          link: "distribuciones#poisson"},
+                          { titulo:"4.4- Distribuciones continuas",
+                          link: "distribucionesII#continuas"},
+                          { titulo:"4.4.1- Distribuciones continuas - normal",
+                          link: "distribucionesII#normal"},
+                          { titulo:"4.4.2- Distribuciones continuas - normal estandarizada",
+                          link: "distribucionesII#normal-estandar"},
+                          { titulo:"4.4.3- Distribuciones continuas- t-Student ",
+                          link: "distribucionesII#t-student"},
+                          { titulo:"4.4.4- Distribuciones continuas- Chi-Cuadrado ",
+                          link: "distribucionesII#chi-cuadrado"},
+                          { titulo:"4.5- Teorema central del límite",
+                          link: "distribucionesII#teorema"}
+                      ]}/>
+            <IndexTable
+            chapter_title="5- Estadística descriptiva y análisis inicial de los datos"
+            chapter_id="analisis"
+              contenidos={[
+                {titulo: "5.1- Presentación de datos categóricos nominales",
+                  link: "analisis#categoricos",},
+                {titulo: "5.2- Presentación de datos cuantitativos",
+                  link: "analisis#cuantitativos"},
+                { titulo: "5.3- Visualización de variables cuantitativas y categóricas",
+                  link: "analisis#visualizacion",
+                },
+                { titulo: "5.4- Estadística descriptiva", 
+                link: "analisis#descriptiva" },
+                { titulo: "5.4.1- Medidas de tendencia central",
+                  link: "analisis#central", },
+                { titulo: "5.4.2- Medidas de dispersión", link: "Analisis#dispersion" },
+                {titulo: "5.5- Ejemplo de estadística descriptiva",
+                  link: "analisis#ejemplo",},        
+                {titulo: "5.6- Relaciones entre variables",
+                  link: "analisis#covarianza",
+                },
+              ]}
+            />
+      <IndexTable
+      chapter_title="6- Pruebas de hipótesis e intervalos"
+      chapter_id="analisis2"
+              contenidos={[
+                {titulo: "6.1- Pruebas de hipótesis",
+                  link: "analisisII#hipotesis",  },
+                {titulo: "6.2- Tipos de pruebas- una o dos colas ",
+                  link: "analisisII#tests",  },
+                { titulo: "6.3- Intervalos de confianza - varianza conocida",
+                  link: "analisisII#intervalo", },
+                { titulo: "6.3.1- Intervalos de confianza - varianza conocida", 
+                link: "analisisII#intervalo" },
+                { titulo: "6.3.2- Intervalos de confianza - varianza desconocida",
+                  link: "analisisII#intervalo2", },
+                {titulo: "6.4- Intervalo de confianza para la diferencia de dos medias en poblaciones normales independientes",
+                  link: "analisisII#intervalo3",
+                },
+                { titulo: "6.5- Intervalo de confianza para la diferencia de dos medias dependientes",
+                  link: "analisisII#intervalo4",
+                },
+              ]}
+            />
+      <IndexTable
+      chapter_title="7- Análisis de Varianza (ANAVA)"
+      chapter_id="anava"
+              contenidos={[
+                {titulo: "7.1-Que es el análisis de varianza (ANAVA)",
+                  link: "anava#anava",  },
+                {titulo: "7.2- El ANAVA de un solo factor",
+                  link: "anava#unianova",  },
+                { titulo: "7.3- El ANAVA de dos factores sin replicación",
+                  link: "anava#twoanova", },
+                { titulo: "7.4- El ANAVA de dos factores con replicación", 
+                link: "anava#twoanovarep" },
+                { titulo: "7.5- La regresión lineal",
+                  link: "anava#linearreg", },
+                { titulo: "7.6- La regresión lineal simple en Excel", 
+                link: "anavaII#reglinex" },
+                {titulo: "7.7- La regresión múltiple en Excel ",
+                  link: "anavaII#regmult",
+                },
+                { titulo: "7.8- La regresión cuadrática en Excel",
+                  link: "anavaII#regquad",
+                },
+                { titulo: "7.9- La regresión con interacción de elementos independientes en Excel",
+                link: "anavaII#reginter",
+              },
+              { titulo: "7.10- Variables nominales y construcción de variables ficticias",
+              link: "anavaII#dummyvars",
+            }
+  
+              ]}/>
+
+  
+            <section id = "referencias" class = "container bg-light">
+          <a href={"/referencias"}><h1>VI- Referencias y Créditos </h1></a> 
+        
+            </section>
+</ChapterLayout>
