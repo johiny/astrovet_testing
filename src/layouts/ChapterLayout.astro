@@ -6,7 +6,7 @@ const {chapter_title, chapter_image} = Astro.props
 ---
 
 <PageLayout>
-  <chapter-layout>
+  <!-- <chapter-layout> -->
     <div id="home">
         <ChapterHead
           titulo={chapter_title}
@@ -19,29 +19,29 @@ const {chapter_title, chapter_image} = Astro.props
           </div>
           </main>
      </div>
-    </chapter-layout>     
+    <!-- </chapter-layout>      -->
 </PageLayout>
 
 <script>
-//   import { headerVisibleChanger } from './minicontext'
-//   class ChapterLayout extends HTMLElement {
-//     constructor() {
-//       super();
-//      const observer = new IntersectionObserver((entries)=> {
-//       entries.forEach((entry) => {
-//                if(entry.isIntersecting){
-//                 headerVisibleChanger(true)
-//                }
-//                else{
-//                 headerVisibleChanger(false)
-//                }
-//      })
-//      })
-//      const chapterheader = this.querySelector("div div.ChapterHead")
-//      if(chapterheader){
-//        observer.observe(chapterheader)
-//     }
-// }
-// }
-//   customElements.define('chapter-layout', ChapterLayout);
+  import { headerVisibleChanger } from './minicontext'
+  class ChapterLayout extends HTMLElement {
+    constructor() {
+      super();
+     const observer = new IntersectionObserver((entries)=> {
+      entries.forEach((entry) => {
+               if(entry.isIntersecting){
+                headerVisibleChanger(true)
+               }
+               else{
+                headerVisibleChanger(false)
+               }
+     })
+     })
+     const chapterheader = this.querySelector("div div.ChapterHead")
+     if(chapterheader){
+       observer.observe(chapterheader)
+    }
+}
+}
+  customElements.define('chapter-layout', ChapterLayout);
 </script>
