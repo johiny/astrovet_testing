@@ -1,10 +1,9 @@
-import 'react-toastify/dist/ReactToastify.css';
 import emailjs from "@emailjs/browser"
-import { useRef, useState} from 'react'
+import { useRef, useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import ContactLoader from '../components/ContactLoader'
-import { toast } from 'react-toastify';
-const Form = (props) => {
+import { ToastContainer, toast } from 'react-toastify';
+const Form = () => {
 
   // manejo del formulario y uso de emailjs
   const form = useRef(null)
