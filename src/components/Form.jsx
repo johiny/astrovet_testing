@@ -3,7 +3,7 @@ import emailjs from "@emailjs/browser"
 import { useRef, useState} from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import ContactLoader from '../components/ContactLoader'
-import { ToastContainer, toast, Flip } from 'react-toastify';
+import { toast } from 'react-toastify';
 const Form = (props) => {
 
   // manejo del formulario y uso de emailjs
